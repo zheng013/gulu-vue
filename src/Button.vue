@@ -1,23 +1,22 @@
 <template>
     <button class="g-button" :class="{[`icon-${iconPosition}`]:iconPosition}">
-        <svg v-if="icon" class="icon" aria-hidden="true">
-            <use :xlink:href="`#icon-${icon}`"></use>
-        </svg>
+       <g-icon v-if="icon" :icon="icon"></g-icon>
         <span>
         <slot></slot>
         </span>
-
     </button>
 </template>
 
 <script lang="ts">
   import Vue from "vue";
   import {Component, Prop} from "vue-property-decorator";
-
-  @Component
+  import gIcon from './Icon.vue'
+  @Component({
+    components: {gIcon}
+  })
   export default class Button extends Vue {
+    @Prop({type:String}) readonly iconPosition:string;
     @Prop({type:String}) readonly icon:string;
-    @Prop({type:String}) readonly iconPosition:string
 
   }
 </script>
@@ -60,10 +59,5 @@
     span{
         line-height: 36px;//解决文字与icon无法居中的问题
     }
-    .icon {
-        width: 1em; height: 1em;
-        vertical-align: center;
-        fill: currentColor;
-        overflow: hidden;
-    }
+
 </style>
