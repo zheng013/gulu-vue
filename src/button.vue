@@ -1,13 +1,14 @@
 <template>
-    <button class="g-button">按钮</button>
+    <button class="g-button"><slot></slot></button>
 </template>
 
 <script lang="ts">
   import Vue from "vue";
-  import {Component} from "vue-property-decorator";
+  import {Component,Prop} from "vue-property-decorator";
 
   @Component
   export default class Button extends Vue {
+    // @Prop({required:true,type:String}) readonly content:string
   }
 </script>
 
