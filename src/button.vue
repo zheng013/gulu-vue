@@ -1,14 +1,24 @@
 <template>
-    <button class="g-button"><slot></slot></button>
+    <button class="g-button" :class="{[`icon-${iconPosition}`]:iconPosition}">
+        <svg v-if="icon" class="icon" aria-hidden="true">
+            <use :xlink:href="`#icon-${icon}`"></use>
+        </svg>
+        <span>
+        <slot></slot>
+        </span>
+
+    </button>
 </template>
 
 <script lang="ts">
   import Vue from "vue";
-  import {Component,Prop} from "vue-property-decorator";
+  import {Component, Prop} from "vue-property-decorator";
 
   @Component
   export default class Button extends Vue {
-    // @Prop({required:true,type:String}) readonly content:string
+    @Prop({type:String}) readonly icon:string;
+    @Prop({type:String}) readonly iconPosition:string
+
   }
 </script>
 
@@ -21,7 +31,10 @@
         border-radius: var(--border-radius);
         background-color: var(--button-bg);
         border: 1px solid var(--border-color);
-
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle; //出现inline元素不对齐使用该属性
         &:hover {
             border-color: var(--border-hover-color);
         }
@@ -33,5 +46,24 @@
         &:focus {
             outline: none; /*被选中时的样式*/
         }
+        >.icon{
+            margin-right: 6px;
+        }
+        &.icon-right{
+            >.icon{
+                order:2;
+                margin-left: 6px;
+                margin-right: 0;
+            }
+        }
+    }
+    span{
+        line-height: 36px;//解决文字与icon无法居中的问题
+    }
+    .icon {
+        width: 1em; height: 1em;
+        vertical-align: center;
+        fill: currentColor;
+        overflow: hidden;
     }
 </style>
