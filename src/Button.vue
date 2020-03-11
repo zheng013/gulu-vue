@@ -1,6 +1,7 @@
 <template>
     <button class="g-button" :class="{[`icon-${iconPosition}`]:iconPosition}">
-       <g-icon v-if="icon" :icon="icon"></g-icon>
+        <g-icon class="loading" icon="loading"></g-icon>
+        <g-icon v-if="icon" :icon="icon"></g-icon>
         <span>
         <slot></slot>
         </span>
@@ -10,13 +11,14 @@
 <script lang="ts">
   import Vue from "vue";
   import {Component, Prop} from "vue-property-decorator";
-  import gIcon from './Icon.vue'
+  import gIcon from "./Icon.vue";
+
   @Component({
     components: {gIcon}
   })
   export default class Button extends Vue {
-    @Prop({type:String}) readonly iconPosition:string;
-    @Prop({type:String}) readonly icon:string;
+    @Prop({type: String}) readonly iconPosition: string;
+    @Prop({type: String}) readonly icon: string;
 
   }
 </script>
@@ -45,19 +47,36 @@
         &:focus {
             outline: none; /*被选中时的样式*/
         }
-        >.icon{
+
+        > .icon {
             margin-right: 6px;
         }
-        &.icon-right{
-            >.icon{
-                order:2;
+
+        &.icon-right {
+            > .icon {
+                order: 2;
                 margin-left: 6px;
                 margin-right: 0;
             }
         }
     }
-    span{
-        line-height: 36px;//解决文字与icon无法居中的问题
+
+    span {
+        line-height: 36px; //解决文字与icon无法居中的问题
     }
 
+    @keyframes spin {
+
+    0%
+    {
+        transform: rotate(0deg);
+    }
+    100%
+    {
+        transform: rotate(360deg);
+    }
+    }
+.loading{
+    animation: spin 2s infinite linear;
+}
 </style>
