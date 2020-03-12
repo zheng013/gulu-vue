@@ -15,8 +15,10 @@ new Vue({
 
 //单元测试
 import chai from 'chai'
-
+import spies from 'chai-spies'
+chai.use(spies)
 const expect = chai.expect
+
 
 // 单元测试button
 {
@@ -54,13 +56,13 @@ const expect = chai.expect
 
 //测试添加了iconPosition
 {
-  const div=document.createElement("div")
+  const div = document.createElement("div")
   document.body.appendChild(div)
   const Constructor = Vue.extend(Button)
   const vm = new Constructor({
-    propsData:{
-      icon:'settings',
-      iconPosition:'right'
+    propsData: {
+      icon: 'settings',
+      iconPosition: 'right'
     }
   })
   vm.$mount(div)
@@ -70,4 +72,20 @@ const expect = chai.expect
   expect(order).to.eq('2')
   vm.$el.remove()
   vm.$destroy()
+}
+
+//mock测试 chai-spies
+{
+  const Constructor = Vue.extend(Button)
+  const vm = new Constructor({
+    propsData:{
+      icon:'settings'
+    }
+  })
+  vm.$mount()
+  const spy = chai.spy(function () {})
+  vm.$on('click', spy)
+  let button = vm.$el
+  button.click()
+  expect(spy).to.have.been.called()
 }
