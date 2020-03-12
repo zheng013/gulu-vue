@@ -1,8 +1,8 @@
 {
   "name": "gulu-1-1",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "这是一个UI框架",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": "https://github.com/zheng013/gulu-vue.git",
   "author": "zheng",
   "license": "MIT",
