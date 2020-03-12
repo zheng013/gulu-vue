@@ -1,7 +1,7 @@
 <template>
     <button class="g-button" :class="{[`icon-${iconPosition}`]:iconPosition}">
-        <g-icon class="loading" icon="loading"></g-icon>
-        <g-icon v-if="icon" :icon="icon"></g-icon>
+        <g-icon v-if="loading" class="loading" icon="loading"></g-icon>
+        <g-icon v-if="icon &&!loading" :icon="icon"></g-icon>
         <span>
         <slot></slot>
         </span>
@@ -19,6 +19,8 @@
   export default class Button extends Vue {
     @Prop({type: String}) readonly iconPosition: string;
     @Prop({type: String}) readonly icon: string;
+    @Prop({type: String}) readonly loading: string;
+
 
   }
 </script>
