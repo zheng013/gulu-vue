@@ -19,7 +19,7 @@
   export default class Button extends Vue {
     @Prop({type: String}) readonly iconPosition: string;
     @Prop({type: String}) readonly icon: string;
-    @Prop({type: String}) readonly loading: string;
+    @Prop({type: Boolean,default:false}) readonly loading: boolean;
 
 
   }
