@@ -1,8 +1,8 @@
 <template>
     <div class="wrapper" :class="{error}">
-        <input type="text" :value="value" :disable="disable" :readonly="read">
+        <input type="text" :value="value" :disable="disable" :readonly="readonly">
         <template v-if="error">
-            <g-icon icon="settings" class="errorIcon"></g-icon>
+            <g-icon icon="error" class="errorIcon"></g-icon>
             <span class="errorMessage">{{error}}</span>
         </template>
     </div>
@@ -22,7 +22,7 @@
   export default class Input extends Vue {
     name: "gInput";
     @Prop({type: String}) error: string;
-    @Prop({type: Boolean, default: false}) read: boolean;
+    @Prop({type: Boolean, default: false}) readonly: boolean;
     @Prop({type: Boolean, default: false}) disable: boolean;
     @Prop({type: String}) value: string;
 
@@ -31,16 +31,6 @@
 </script>
 
 <style lang="scss" scoped>
-    /*html {*/
-    /*    --button-height: 36px;*/
-    /*    --font-size: 14px;*/
-    /*    --button-bg: white;*/
-    /*    --button-active-bg: #eee;*/
-    /*    --border-radius: 4px;*/
-    /*    --color: #333;*/
-    /*    --border-color: #999;*/
-    /*    --border-hover-color: #666*/
-    /*}*/
     $border-color: #999;
     $height: 36px;
     $border-color-hover: #666;
@@ -78,10 +68,9 @@
                 color: #bbb;
                 cursor: not-allowed;
               &:focus{
-                  box-shadow: none;
-              }
-
+                box-shadow: none;
             }
+        }
         }
 
         &.error {
