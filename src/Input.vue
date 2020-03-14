@@ -16,7 +16,7 @@
 
   @Component({
     components: {
-      'g-icon':Icon,
+      "g-icon": Icon,
     }
   })
   export default class Input extends Vue {
@@ -55,7 +55,7 @@
             font-size: inherit;
 
             &:hover {
-                border-color:  $border-color-hover;
+                border-color: $border-color-hover;
             }
 
             &:focus {
@@ -67,10 +67,11 @@
                 border-color: #bbb;
                 color: #bbb;
                 cursor: not-allowed;
-              &:focus{
-                box-shadow: none;
+
+                &:focus {
+                    box-shadow: none;
+                }
             }
-        }
         }
 
         &.error {

@@ -5,21 +5,22 @@
 </template>
 
 <script lang="ts">
-    import './svg.js'
+  import "./svg.js";
   import Vue from "vue";
-  import {Component,Prop} from "vue-property-decorator";
+  import {Component, Prop} from "vue-property-decorator";
 
   @Component
   export default class Icon extends Vue {
-    name:'gIcon';
-    @Prop({type:String}) readonly icon:string;
+    name: "gIcon";
+    @Prop({type: String}) readonly icon: string;
 
   }
 </script>
 
 <style lang="scss" scoped>
     .icon {
-        width: 1em; height: 1em;
+        width: 1em;
+        height: 1em;
         vertical-align: center;
         fill: currentColor;
         overflow: hidden;
