@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper" :class="{error}">
-        <input type="text" :value="value" :disable="disable" :readonly="readonly"
+        <input type="text" :value="value" :disabled="disabled" :readonly="readonly"
                @change="$emit('change', $event)"
                @input="$emit('input',$event)"
                @focus="$emit('focus',$event)"
@@ -28,7 +28,7 @@
     name: "gInput";
     @Prop({type: String}) error: string;
     @Prop({type: Boolean, default: false}) readonly: boolean;
-    @Prop({type: Boolean, default: false}) disable: boolean;
+    @Prop({type: Boolean, default: false}) disabled: boolean;
     @Prop({type: String}) value: string;
 
 

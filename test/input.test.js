@@ -20,12 +20,12 @@ describe("Input", () => {
       const inputEl = vm.$el.querySelector("input")
       expect(inputEl.value).to.eq('李四')
     })
-    it('disable可传',()=>{
+    it('disabled可传',()=>{
       vm = new Constructor({
         propsData:{
-          disable:true
+          disabled:true
         }
-      })
+      }).$mount()
       const inputEl=vm.$el.querySelector("input")
       exepect(inputEl.disabled).to.eq(true)
     })
@@ -47,7 +47,7 @@ describe("Input", () => {
       const useEl = vm.$el.querySelector("use")
       exepect(useEl.getAttribute('xlink:href')).to.eq('#icon-error')
       const errorMessage = vm.$el.querySelector(".errorMessage")
-      exepect(errorMessage).to.eq('你错了')
+      exepect(errorMessage.innerText).to.eq('你错了')
     })
   })
   describe("监听input上的部分事件", () => {
