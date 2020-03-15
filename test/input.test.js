@@ -60,9 +60,12 @@ describe("Input", () => {
         vm.$on(eventName, callback)
         //触发input的change事件
         const event = new Event(eventName)
+        Object.defineProperty(event,'target',{
+          value:{value:'hi'}
+        })
         const inputEl = vm.$el.querySelector("input")
         inputEl.dispatchEvent(event)
-        exepect(callback).to.have.been.calledWith(event)
+        exepect(callback).to.have.been.calledWith('hi')
         vm.$destroy()
       })
 
