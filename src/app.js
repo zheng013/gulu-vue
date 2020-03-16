@@ -16,7 +16,7 @@ new Vue({
   data: {
     loading1: false,
     loading2: false,
-    message:0
+    message:'0'
   }
 })
 
