@@ -1,5 +1,5 @@
 <template>
-    <div class="row" :style="{marginRight:-gutter/2+'px',marginLeft:-gutter/2+'px'}">
+    <div class="row" :style="rowStyle">
         <slot></slot>
     </div>
 </template>
@@ -15,7 +15,11 @@
     mounted() {
       this.$children.forEach(vm=>{
         vm.gutter=this.gutter
-      })
+      })}
+      get rowStyle(){
+      const {gutter}=this;
+       return {marginRight:-gutter/2+'px',marginLeft:-gutter/2+'px'}
+
     }
 
 
@@ -26,5 +30,6 @@
 <style lang="scss" scoped>
     .row {
         display: flex;
+        flex-wrap: wrap;
     }
 </style>

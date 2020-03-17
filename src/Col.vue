@@ -1,9 +1,7 @@
 <template>
-    <div class="col" :class="{[`col-${span}`]:span,[`offset-${offset}`]:offset}"
-         :style="{paddingRight:gutter/2+'px',paddingLeft:gutter/2+'px'}">
-        <div style="border: 1px solid darkred ;background: #eee;height: 100px">
+    <div class="col" :class="colClass"
+         :style="colStyle">
             <slot></slot>
-        </div>
     </div>
 </template>
 
@@ -16,12 +14,24 @@
     @Prop({type: [String, Number]}) span: string | number;
     @Prop({type: [String, Number]}) offset: string | number;
     gutter: string | number = 0;
+
+    get colStyle() {
+      const {gutter} = this;
+      return {paddingRight: gutter / 2 + "px", paddingLeft: gutter / 2 + "px"};
+    }
+
+    get colClass() {
+      const {span, offset} = this;
+      return {[`col-${span}`]: span, [`offset-${offset}`]: offset};
+    }
   }
 </script>
 
 <style lang="scss" scoped>
     .col {
-        width: 50%;
+        img{
+            max-width: 100%;
+        }
         $class-prefix: col-;
         @for $n from 1 through 24 {
             &.#{$class-prefix}#{$n} {
