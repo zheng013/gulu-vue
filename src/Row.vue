@@ -1,5 +1,5 @@
 <template>
-    <div class="row" :style="rowStyle">
+    <div class="row" :style="rowStyle" :class="rowClass">
         <slot></slot>
     </div>
 </template>
@@ -11,17 +11,27 @@
   @Component
   export default class Row extends Vue {
     @Prop({type: [String, Number]}) gutter: string | number;
+    @Prop({
+      type: String,
+      validator(value): boolean {return ["left", "right", "center"].includes(value);}
+    }) align: string;
 
     mounted() {
-      this.$children.forEach(vm=>{
-        vm.gutter=this.gutter
-      })}
-      get rowStyle(){
-      const {gutter}=this;
-       return {marginRight:-gutter/2+'px',marginLeft:-gutter/2+'px'}
+      this.$children.forEach(vm => {
+        vm.gutter = this.gutter;
+      });
+    }
+
+    get rowStyle() {
+      const {gutter} = this;
+      return {marginRight: -gutter / 2 + "px", marginLeft: -gutter / 2 + "px"};
 
     }
 
+    get rowClass() {
+      const {align} = this;
+      return {[`align-${align}`]: align};
+    }
 
   }
 
@@ -31,5 +41,17 @@
     .row {
         display: flex;
         flex-wrap: wrap;
+
+        &.align-left {
+            justify-content: flex-start;
+        }
+
+        &.align-right {
+            justify-content: flex-end;
+        }
+
+        &.align-center {
+            justify-content: center;
+        }
     }
 </style>
