@@ -1,5 +1,7 @@
 <template>
-    <div></div>
+    <div class="sider">
+        <slot></slot>
+    </div>
 </template>
 
 <script lang="ts">
@@ -7,7 +9,7 @@
   import {Component} from "vue-property-decorator";
 
   @Component
-  export default class footer extends Vue {
+  export default class Sider extends Vue {
 
   }
 </script>
