@@ -13,7 +13,7 @@
     const keys = Object.keys(value);
     let valid = true;
     keys.forEach((key) => {
-      if (!["span", "offset"].includes(key)) {
+      if (!(["span", "offset"].includes(key))) {
         valid = false;
       }
     });
@@ -37,10 +37,10 @@
     get colClass() {
       const {span, offset, ipad,narrowPc,pc,widePc} = this;
       return {[`col-${span}`]: span, [`offset-${offset}`]: offset,
-              [`col-ipad-${ipad?.span}`]: ipad,
-              [`col-narrowPc-${narrowPc?.span}`]: narrowPc,
-              [`col-pc-${pc?.span}`]:pc,
-              [`col-widePc-${widePc?.span}`]: widePc,
+              [`col-ipad-${ipad?.span}`]: ipad?.span,[`col-ipad-offset-${ipad?.offset}`]: ipad?.offset,
+              [`col-narrow-pc-${narrowPc?.span}`]: narrowPc?.span,[`col-narrow-pc-offset-${narrowPc?.offset}`]: narrowPc?.offset,
+              [`col-pc-${pc?.span}`]:pc?.span,[`col-pc-offset-${pc?.offset}`]:pc?.offset,
+              [`col-wide-pc-${widePc?.span}`]: widePc?.span,[`col-wide-pc-offset-${widePc?.offset}`]: widePc?.offset,
               };
     }
   }
