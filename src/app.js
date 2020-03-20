@@ -10,6 +10,7 @@ import Content from "./Content"
 import Sider from "./Sider"
 import Footer from "./Footer"
 import Plugin from './plugin.js'
+
 Vue.use(Plugin)
 
 Vue.component('g-button', Button)
@@ -29,6 +30,16 @@ new Vue({
     loading1: false,
     loading2: false,
     message: '0'
+  },
+  created() {
+    this.$toast('大家好',{
+      closeButton:{
+        text:'关闭',
+        callback(toast){
+           console.log(toast.log())
+        }
+      }
+    })
   },
   methods: {
     showToast() {
