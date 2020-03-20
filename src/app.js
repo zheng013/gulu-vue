@@ -9,23 +9,31 @@ import Header from "./Header"
 import Content from "./Content"
 import Sider from "./Sider"
 import Footer from "./Footer"
+import Plugin from './plugin.js'
+Vue.use(Plugin)
 
 Vue.component('g-button', Button)
 Vue.component('g-button-group', ButtonGroup)
-Vue.component('g-input',Input)
-Vue.component('g-row',Row)
-Vue.component('g-clo',Col)
-Vue.component('g-layout',Layout)
-Vue.component('g-header',Header)
-Vue.component('g-content',Content)
-Vue.component('g-sider',Sider)
-Vue.component('g-footer',Footer)
+Vue.component('g-input', Input)
+Vue.component('g-row', Row)
+Vue.component('g-clo', Col)
+Vue.component('g-layout', Layout)
+Vue.component('g-header', Header)
+Vue.component('g-content', Content)
+Vue.component('g-sider', Sider)
+Vue.component('g-footer', Footer)
+
 new Vue({
   el: '#app',
   data: {
     loading1: false,
     loading2: false,
-    message:'0'
+    message: '0'
+  },
+  methods: {
+    showToast() {
+      this.$toast('大家好')
+    }
   }
 })
 
