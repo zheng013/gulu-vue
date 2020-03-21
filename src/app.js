@@ -29,21 +29,29 @@ new Vue({
   data: {
     loading1: false,
     loading2: false,
-    message: '0'
+    message: '0',
+
   },
   created() {
-    this.$toast('你的支付宝有一笔转账待查收',{
-      closeButton:{
-        text:'关闭',
-        callback(toast){
-           console.log(toast.log())
-        }
-      }
-    })
+
   },
   methods: {
-    showToast() {
-      this.$toast('大家好')
+    showToast1() {
+      this.showToast('middle')
+    },
+    showToast2() {
+      this.showToast('bottom')
+    },
+    showToast(position) {
+      this.$toast('你的支付宝有一笔转账待查收', {
+        position,
+        closeButton: {
+          text: '关闭',
+          callback(toast) {
+            console.log(toast.log())
+          }
+        }
+      })
     }
   }
 })

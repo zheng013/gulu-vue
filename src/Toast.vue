@@ -1,5 +1,5 @@
 <template>
-    <div class="toast" ref="wrapper">
+    <div class="toast" ref="wrapper" :class="toastClass">
         <div v-if="enableHtml" v-html="this.$slots.default[0]">222</div>
         <slot v-else></slot>
         <div class="closeWrapper" v-if="closeButton" ref="line">
@@ -22,6 +22,10 @@
       }
     }) closeButton: object;
     @Prop({type: Boolean, default: false}) enableHtml: boolean;
+    @Prop({
+      type: String, default: "top",
+      validator(value): boolean {return ["top", "middle", "bottom"].indexOf(value) >= 0;}
+    }) position: string;
 
     mounted() {
       this.exeAutoClose();
@@ -36,9 +40,14 @@
       }
     }
 
+    get toastClass() {
+      const {position} = this;
+      return {[`position-${position}`]: position};
+    }
+
     updateStyles() {
       this.$nextTick(() => {
-        this.$refs.line.style.height = `${this.$refs.wrapper.getBoundingClientRect().height}+px`; //动态获取div的高度进行赋值
+        this.$refs.line.style.height = `${this.$refs.wrapper.getBoundingClientRect().height}px`; //动态获取div的高度进行赋值
       });
     }
 
@@ -73,13 +82,26 @@
         display: flex;
         align-items: center;
         position: fixed;
-        top: 0;
         background: $toast-bg;
         color: #ffffff;
         left: 50%;
         transform: translateX(-50%);
         padding: 0 16px;
         line-height: 1.5;
+        cursor: default;
+
+        &.position-top {
+            top: 0;
+        }
+
+        &.position-middle {
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        &.position-bottom {
+            bottom: 0
+        }
     }
 
     .closeWrapper {
