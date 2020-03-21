@@ -1,7 +1,8 @@
 <template>
-    <div class="toast">
-        <slot></slot>
-        <div class="closeWrapper" v-if="closeButton">
+    <div class="toast" ref="wrapper">
+        <div v-if="enableHtml" v-html="this.$slots.default[0]">222</div>
+        <slot v-else></slot>
+        <div class="closeWrapper" v-if="closeButton" ref="line">
             <span class="close" @click='onClickClose'>{{closeButton.text}}</span>
         </div>
     </div>
@@ -14,32 +15,47 @@
   @Component
   export default class Toast extends Vue {
     @Prop({type: Boolean, default: true}) autoClose: boolean;
-    @Prop({type: Number, default: 50}) autoCloseDelay: number;
-
+    @Prop({type: Number, default: 5}) autoCloseDelay: number;
     @Prop({
       type: Object, default: () => {
         return {text: "关闭", callback: undefined};
       }
     }) closeButton: object;
+    @Prop({type: Boolean, default: false}) enableHtml: boolean;
 
     mounted() {
-      setTimeout(() => {
-        this.close();
-      }, this.autoCloseDelay * 1000);
+      this.exeAutoClose();
+      this.updateStyles();
+    }
+
+    exeAutoClose() {
+      if (this.autoClose) {
+        setTimeout(() => {
+          this.close();
+        }, this.autoCloseDelay * 1000);
+      }
+    }
+
+    updateStyles() {
+      this.$nextTick(() => {
+        this.$refs.line.style.height = `${this.$refs.wrapper.getBoundingClientRect().height}+px`; //动态获取div的高度进行赋值
+      });
     }
 
     close() {
       this.$el.remove();
       this.$destroy();
     }
-    log(){
-      console.log('测试')  //用于测试
+
+    log() {
+      console.log("测试");  //用于测试
     }
-    onClickClose(){
+
+    onClickClose() {
       this.close();
-      const callback=this.closeButton.callback;
-      if(callback&& typeof callback ==='function' ){
-        callback(this)
+      const callback = this.closeButton.callback;
+      if (callback && typeof callback === "function") {
+        callback(this);
       }
     }
   }
@@ -67,19 +83,15 @@
     }
 
     .closeWrapper {
-        line-height: 40px;
         position: relative;
-
-        &::before {
-            content: '';
-            position: absolute;
-            border: 0.5px solid #666;
-            height: 38px;
-            margin-left: 16px;
-        }
+        display: flex;
+        align-items: center;
+        border-left: 1px solid #666;
+        margin-left: 16px;
+        cursor: default;
 
         > .close {
-            margin-left: 32px;
+            margin-left: 16px;
             flex-shrink: 0;
         }
     }

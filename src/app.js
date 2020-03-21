@@ -32,7 +32,7 @@ new Vue({
     message: '0'
   },
   created() {
-    this.$toast('大家好',{
+    this.$toast('你的支付宝有一笔转账待查收',{
       closeButton:{
         text:'关闭',
         callback(toast){
