@@ -75,6 +75,35 @@
     $font-size: 14px;
     $min-height: 40px;
     $toast-bg: rgba(0, 0, 0, 0.75);
+    $duration:.4s;
+    @keyframes slide-down {
+        from{
+            opacity: 0;
+            transform: translate(-50%,-100%);
+        }
+        to{
+            transform: translate(-50%,0%);
+            opacity: 1;
+        }
+    }@keyframes slide-up {
+        from{
+            opacity: 0;
+            transform: translate(-50%,100%);
+        }
+        to{
+            transform: translate(-50%,0%);
+            opacity: 1;
+        }
+    }
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
     .toast {
         font-size: $font-size;
         min-height: $min-height;
@@ -92,16 +121,23 @@
         cursor: default;
 
         &.position-top {
+            animation: slide-down  $duration;
             top: 0;
+            border-top-right-radius: 0;
+            border-top-left-radius: 0;
         }
 
         &.position-middle {
+            animation: fade-in  $duration;
             top: 50%;
             transform: translate(-50%, -50%);
         }
 
         &.position-bottom {
-            bottom: 0
+            animation: slide-up  $duration;
+            bottom: 0;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
         }
     }
 
